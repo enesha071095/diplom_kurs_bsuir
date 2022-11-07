@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+    web:
+        build: .
+        image: rails-documentflow
+        stdin_open: true
+        tty: true
+        restart: "no"
+        environment:
+            - DBHOST=postgresql
+            - DBUSER=postgres
+            - DBPASS=root
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/app
+        depends_on:
+            - postgresql
+
+    postgresql:
+        image: postgres
+        restart: "no"
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_DB: docker_rails_development
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: root
+        volumes:
+            - postgresdb:/var/lib/postgresql/data/
+
+volumes:
+    postgresdb:
