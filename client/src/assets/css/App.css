@@ -1,5 +1,5 @@
 #classicformpage .view {
-    background-image: url("http://mdbootstrap.com/img/Photos/Others/images/89.jpg");
+    background-image: url("https://belwood.kz/upload/iblock/286/2868e20cde732faa6e81ab52d90ea3b3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -7,19 +7,10 @@
   }
 
   #classicformpage .gradient {
-    background: -webkit-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.7),
-      rgba(72, 15, 144, 0.4) 100%
-    );
-    background: -webkit-gradient(
-      linear,
-      45deg,
-      from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%)
-    );
+
     background: linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.7),
-      rgba(72, 15, 144, 0.4) 100%
+      rgba(61, 46, 20, 0.4) 100%
     );
   }

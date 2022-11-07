@@ -15,3 +15,9 @@ services:
             - /app/node_modules
         environment:
             - CHOKIDAR_USEPOLLING=true # to watch changes and refresh page if appears
+
+#E0AA46
+
+#2E230E
+
+#1F1503

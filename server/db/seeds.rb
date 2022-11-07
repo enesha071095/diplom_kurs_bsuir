@@ -27,25 +27,25 @@ def random_work_exp
     Time.now-rand(6..20).month
 end
 path_to_avatars = "#{Rails.root}/app/assets/images/avatars/"
-imgs = ["0.jpg", "1.jpg","2.jpg","3.jpg","4.jpg", "5.jpg"]
+imgs = ["0.jpeg", "1.jpeg","2.jpeg","3.jpeg","4.jpeg", "5.jpeg"]
 
 u = User.create!(
-    {first_name: "Аркадий", second_name: "Ермоленко",  phone_number: "+375337899511",
-position_id: 1, email: "admin123@gmail.com", is_chief: true, 
+    {first_name: "Виктор", second_name: "Добрянин",  phone_number: "+375337899511",
+position_id: 1, email: "admin123@gmail.com", is_chief: true,
        password: "admin123", password_confirmation: "admin123", jti: SecureRandom.uuid}
   )
   u.created_at = random_work_exp
     u.avatar.attach(io: File.open(path_to_avatars+imgs[0]), filename: imgs[0],content_type: 'image/jpeg'  )
   u.save
 u = User.create!(
-        {first_name: "Елена", second_name: "Иванова",  phone_number: "+375295689556",
+        {first_name: "Елена", second_name: "Новикова",  phone_number: "+375295689556",
             position_id: 5, email: "user1@gmail.com",
              password: "admin123", password_confirmation: "admin123", jti: SecureRandom.uuid })
 u.created_at = random_work_exp
 u.avatar.attach(io: File.open(path_to_avatars+imgs[3]), filename: imgs[3] ,content_type: 'image/jpeg'  )
 u.save
 
-u = User.create!({first_name: "Иван", second_name: "Осташко",  phone_number: "+375295789859",
+u = User.create!({first_name: "Иван", second_name: "Лапцевич",  phone_number: "+375295789859",
 position: Position.last, email: "user2@gmail.com",
  password: "admin123", password_confirmation: "admin123", jti: SecureRandom.uuid})
 u.created_at = random_work_exp
@@ -55,7 +55,7 @@ u.save
 
 
   u = User.create!(
-    {first_name: "Николай", second_name: "Трошко",  phone_number: "+375337897544",
+    {first_name: "Николай", second_name: "Смирнов",  phone_number: "+375337897544",
 position_id: 2, email: "user3@gmail.com",
        password: "admin123", password_confirmation: "admin123", jti: SecureRandom.uuid}
   )
@@ -64,8 +64,8 @@ position_id: 2, email: "user3@gmail.com",
       u.save
 
     u = User.create!(
-    {first_name: "Дарья", second_name: "Синкевич", phone_number: "+375447891122",
-        position_id: 4, email: "user4@gmail.com", 
+    {first_name: "Дарья", second_name: "Матюкова", phone_number: "+375447891122",
+        position_id: 4, email: "user4@gmail.com",
         password: "admin123", password_confirmation: "admin123", jti: SecureRandom.uuid}
     )
     u.created_at = random_work_exp
@@ -73,8 +73,8 @@ position_id: 2, email: "user3@gmail.com",
     u.save
 
     u = User.create!(
-        {first_name: "Юлия", second_name: "Астафьева", phone_number: "+375447891122",
-            position_id: 7, email: "user5@gmail.com", 
+        {first_name: "Юлия", second_name: "Прокопенко", phone_number: "+375447891122",
+            position_id: 7, email: "user5@gmail.com",
             password: "admin123", password_confirmation: "admin123", jti: SecureRandom.uuid}
         )
         u.created_at = random_work_exp
@@ -82,26 +82,35 @@ position_id: 2, email: "user3@gmail.com",
         u.save
 
 
-### TYPES 
+### TYPES
     Type.create!([
-        {name: "Офисные стулья"}, #1
-        {name: "Офисные столы"},#2
+        {name: "Microsoft Office лицензии"}, #1
+        {name: "Лицензии Kaspersky"},#2
 
-        {name: "Портативные зарядные устройства"},#3
-        {name: "Компьютеры"}, #4
-        {name: "Мониторы"}, #5
-        {name: "Принтеры"},#6
+        {name: "Расводные платы Nordic-32"},#3
+        {name: "Программаторы Sim-Link"}, #4
+        {name: "Диспели Raspberry"}, #5
+        {name: "Одноплатные ПК Orange"},#6
 
-        {name: "Доски для презентации"}, #7
-        {name: "Бумага А4"}, 
-        {name: "Канцелярские наборы"}, 
+        {name: "Столы с регуляцией высоты"}, #7
+        {name: "Увлажнители воздуха"},
+        {name: "Звукоизоляционные кабины"},
     ])
 
     Departament.create!([
-        {name: "Отдел мебели"},
-        {name: "Отдел электроники"},
-        {name: "Отдел канцелярии"},
+        {name: "Отдел ПО"},
+        {name: "Отдел микроэлектроники"},
+        {name: "Отдел офисной электроники"},
     ])
+
+    ContractType.create!([
+        {name: "Продажа"}
+      ])
+Currency.create!([
+                   {name: "EUR"},
+                   {name: "BYN"},
+                   {name: "USD"}
+                 ])
 
 ### DEPARTAMENTS
 def random_deadline
@@ -115,6 +124,10 @@ def rcount
     rand(60..300)
 end
 
+def ramount
+  rand(1000..4000)
+end
+
 path_to_files = "#{Rails.root}/app/assets/doc_files/"
 content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 
@@ -123,65 +136,84 @@ def random_created
 end
 
 ###    DOCUMENTS
+
+    rd = random_deadline
      d = Document.create!({
-        user_id: 2,  name: "Продажа стульев",departament_id: 1, type_id: 1,
-        status: false,  deadline: random_deadline, count: rcount
+        user_id: 2,  name: "Продажа лицензий",departament_id: 1, type_id: 1,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 2,  name: "Продажа столов",departament_id: 1, type_id: 2,
-        status: true,  deadline: random_deadline, count: rcount
+        user_id: 2,  name: "Продажа лицензий ",departament_id: 1, type_id: 2,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 3,  name: "Внеплановая продажа",departament_id: 2, type_id: 2,
-        status: true,  deadline: random_deadline, count: rcount
+        user_id: 3,  name: "Внеплановая лицензий",departament_id: 2, type_id: 2,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 3,  name: "Продажа принтеров",departament_id: 2, type_id: 5,
-        status: false,  deadline: random_deadline, count: rcount
+        user_id: 3,  name: "Продажа Raspberry",departament_id: 2, type_id: 5,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 4,  name: "Продажа бумаги по частям",departament_id: 3, type_id: 8,
-        status: false,  deadline: random_deadline, count: rcount
+        user_id: 4,  name: "Продажа увлажнителей",departament_id: 3, type_id: 8,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 2,  name: "Продажа нескольких ПК",departament_id: 2, type_id: 4,
-        status: false,  deadline: random_deadline, count: rcount
+        user_id: 2,  name: "Продажа программаторов",departament_id: 2, type_id: 4,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 2,  name: "Продажа устаревших мониторов",departament_id: 2, type_id: 5,
-        status: false,  deadline: random_deadline, count: rcount
+        user_id: 2,  name: "Продажа Raspberry",departament_id: 2, type_id: 5,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
+
     })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 2,  name: "Продажа китайских PB",departament_id: 2, type_id: 3,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+        user_id: 2,  name: "Продажа Nordic-32",departament_id: 2, type_id: 3,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 3,  name: "Продажа вскрытых канц-наборов",departament_id: 3, type_id: 9,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 3,  name: "Продажа кабин",departament_id: 3, type_id: 9,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 3,  name: "Продажа новых канц-наборов",departament_id: 3, type_id: 9,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+        user_id: 3,  name: "Продажа кабин",departament_id: 3, type_id: 9,
+        status: true, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 3,  name: "Продажа ПК",departament_id: 2, type_id: 4,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 3,  name: "Продажа программаторов",departament_id: 2, type_id: 4,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 3,  name: "Новые мониторы",departament_id: 2, type_id: 5,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+        user_id: 3,  name: "Новые дисплеи",departament_id: 2, type_id: 5,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
+
+                         })
 
 
 
@@ -189,73 +221,101 @@ end
 
 
 
-    
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 4,  name: "Продажа стульев",departament_id: 1, type_id: 1,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 4,  name: "Продажа Microsoft Office",departament_id: 1, type_id: 1,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 4,  name: "Внеплановая продажа",departament_id: 2, type_id: 2,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 4,  name: "Внеплановая продажа Kaspersky",departament_id: 2, type_id: 2,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 4,   name: "Продажа бумаги по частям",departament_id: 3, type_id: 8,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+        user_id: 4,   name: "Продажа звукоизоляции",departament_id: 3, type_id: 8,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 4,   name: "Продажа устаревших мониторов",departament_id: 2, type_id: 5,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+        user_id: 4,   name: "Продажа экранов",departament_id: 2, type_id: 5,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 4,  name: "Продажа вскрытых канц-наборов",departament_id: 3, type_id: 9,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 4,  name: "Продажа кабин-без-звука",departament_id: 3, type_id: 9,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 5,   name: "Продажа ПК",departament_id: 2, type_id: 4,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 5,   name: "Продажа Sim-Link",departament_id: 2, type_id: 4,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 5,  name: "Новые мониторы",departament_id: 2, type_id: 5,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 5,  name: "Новые Дисплеи Raspberry",departament_id: 2, type_id: 5,
+        status: false, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 5,  name: "Продажа нескольких ПК",departament_id: 2, type_id: 4,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+        user_id: 5,  name: "Продажа нескольких программаторов",departament_id: 2, type_id: 4,
+        status: true,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
-        user_id: 5,   name: "Продажа бумаги по частям",departament_id: 3, type_id: 8,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 5,   name: "Продажа устаревших увлажнителей",departament_id: 3, type_id: 8,
+        status: false, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
+                         })
+
+rd = random_deadline
     d = Document.create!({
         user_id: 6,  name: "Внеплановая продажа",departament_id: 2, type_id: 2,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        status: false, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
-    d = Document.create!({
-        user_id: 6, name: "Продажа принтеров",departament_id: 2, type_id: 5,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+                         })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 6,   name: "Продажа столов",departament_id: 1, type_id: 2,
-        status: true,  deadline:random_deadline, count: rcount
-    })
+        user_id: 6, name: "Продажа Raspberry",departament_id: 2, type_id: 5,
+        status: false, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
 
-    d = Document.create!({
-        user_id: 6,   name: "Продажа столов",departament_id: 1, type_id: 2,
-        status: true,  deadline: random_deadline, count: rcount
-    })
+                         })
 
+rd = random_deadline
     d = Document.create!({
-        user_id: 6,   name: "Продажа принтеров",departament_id: 2, type_id: 5,
-        status: false,  deadline: random_deadline, count: rcount
-    })
+        user_id: 6,   name: "Продажа Kaspersky несколько",departament_id: 1, type_id: 2,
+        status: true, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
+
+                         })
+
+rd = random_deadline
+    d = Document.create!({
+        user_id: 6,   name: "Продажа лицензий",departament_id: 1, type_id: 2,
+        status: true, deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
+
+                         })
+
+rd = random_deadline
+    d = Document.create!({
+        user_id: 6,   name: "Продажа Raspberry",departament_id: 2, type_id: 5,
+        status: false,  deadline: rd, count: rcount, amount: ramount, execution_deadline: rd+40.days, currency_id: rand(1..3)
+
+                         })

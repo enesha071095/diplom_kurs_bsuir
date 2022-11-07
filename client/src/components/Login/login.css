@@ -1,26 +1,31 @@
 
 #classicformpage .card {
-    background-color: rgba(126, 123, 215, 0.2);
+    background-color:       rgba(61, 46, 20, 0.4) ;
   }
-  
+
   #classicformpage h6 {
     line-height: 1.7;
   }
-  
-  #classicformpage .navbar {
+
+  .createDocView{
+    background-color: #2196f3;
+  }
+
+
+#classicformpage .navbar {
     transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
   }
-  
+
   #classicformpage .top-nav-collapse {
     background: #424f95 !important;
   }
-  
+
   @media (max-width: 768px) {
     #classicformpage .navbar:not(.top-nav-collapse) {
       background: #424f95 !important;
     }
   }
-  
+
   #classicformpage label {
     color: #fff !important;
   }
@@ -29,7 +34,7 @@
     animation: shake 0.5s;
     animation-iteration-count: infinite;
   }
-  
+
   @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
     10% { transform: translate(-1px, -2px) rotate(-1deg); }

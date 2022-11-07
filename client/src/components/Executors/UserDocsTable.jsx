@@ -5,7 +5,7 @@ import { AuthContext } from '../../context';
 const UserDocsTable = ({docs}) => {
 
   const {isAdmin} = useContext(AuthContext)
-  
+
   return (
     <MDBRow className="mb-4">
           <MDBCol md="12">
@@ -28,7 +28,7 @@ const UserDocsTable = ({docs}) => {
                           :
                           <></>
                           }
-                          
+
                         </tr>
                       </MDBTableHead>
                       <MDBTableBody>
@@ -47,12 +47,12 @@ const UserDocsTable = ({docs}) => {
                             <td>
                             <a className="p-2" href={
                                 `http://localhost:3000${doc.file}`}>
-                                <MDBIcon icon="download" className="ml-1"/>
+                                <MDBIcon icon="download" className="ml-1" style={{color: "green"}} />
                             </a></td>
                           :
                           <></>
                           }
-                                    
+
                                 </tr>
                                 </>
                             )
@@ -63,7 +63,7 @@ const UserDocsTable = ({docs}) => {
                   </MDBCardBody>
               </MDBCard>
           </MDBCol>
-          
+
       </MDBRow>
   )
 }

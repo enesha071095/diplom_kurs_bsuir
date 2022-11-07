@@ -22,20 +22,20 @@ const ExecutorsPage = () => {
             try{
                 const response = await UserService.getAll()
                 console.log(response.data.data)
-                
+
                  var tempData=response.data.data.data.map((u)=>{
                    var obj={}
                    obj.user={...u.attributes}
                    var docs = response.data.data.included.filter((doc)=>doc.attributes.user_id===u.attributes.id
                    ).map((doc)=>doc.attributes)
                    obj.docs=docs
-                   return obj 
+                   return obj
                   })
                   setUsersData(tempData)
                 setIsLoading(false)
             }
             catch(e){
-                console.log(e) 
+                console.log(e)
                 setIsLoading(false)
               }
            }
@@ -43,30 +43,30 @@ const ExecutorsPage = () => {
            fetchUsers()
     },[])
 
-   
+
         return (
            <>
-              <SimpleBreadcrumSection isAdmin={isAdmin} pageName="Члены корпорации" 
+              <SimpleBreadcrumSection isAdmin={isAdmin} pageName="Клиенты корпорации"
                 form={<SearchForm query={query} setQuery={setQuery} />} />
 
             {
               isLoading ?
               <MDBRow className="justify-content-center">
                   <MDBCol  lg="3" className="mb-5">
-                  <img src={iconLoadSrc} alt="Project"  
-                  style={{display: 'block', margin: 'auto',  objectFit: 'cover'}} 
+                  <img src={iconLoadSrc} alt="Project"
+                  style={{display: 'block', margin: 'auto',  objectFit: 'cover'}}
                   className="img-fluid "/>
-                                     
+
                                 </MDBCol>
               </MDBRow>
-              
+
               :
-              searchedUsersData.map( (data) => 
+              searchedUsersData.map( (data) =>
               <>
               <MDBRow className="justify-content-center">
-              
+
                 <UserCard user={data.user} key={data.user.id} />
-                
+
               <MDBCol  lg="9" className="mb-5">
                 <UserDocsTable  docs={data.docs}  key={data.user.id} />
               </MDBCol>
@@ -78,7 +78,7 @@ const ExecutorsPage = () => {
 
            </>
           );
-    
+
 }
 
 export default ExecutorsPage

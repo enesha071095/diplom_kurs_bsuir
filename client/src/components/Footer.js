@@ -19,7 +19,7 @@ const Footer = () => {
                 <MDBIcon fab icon="codepen" className="mr-3"/>
             </div>
             <p className="footer-copyright mb-0 py-3 text-center">
-            КАЛАНДАРОВА Камила Атаджановна
+                ХЕББЕКУЛИЕВА ЭНЕШ
             </p>
         </MDBFooter>
     );

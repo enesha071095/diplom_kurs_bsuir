@@ -35,10 +35,12 @@ export const useSortedDocs = (docs, sort) => {
     const sortedDocs = useSortedDocs(documents, sort);
 
     const searchedDocs = useMemo(()=>{
-        return sortedDocs.filter(doc => 
+        return sortedDocs.filter(doc =>
                 doc.name.toLowerCase().includes(query.toLowerCase())
                 ||
                 doc.departament.toLowerCase().includes(query.toLowerCase())
+                ||
+                doc.currency.toLowerCase().includes(query.toLowerCase())
                 ||
                 doc.type.toLowerCase().includes(query.toLowerCase())
             )

@@ -2,13 +2,13 @@ import React from 'react';
 import { MDBIcon, MDBFormInline, MDBBtn } from 'mdbreact';
 
 const SearchForm = ({query, setQuery}) => {
-    
 
-    
+
+
     return (
       <>
         <input className="form-control form-control-sm"  style={{color: "white"}}
-        type="search" placeholder="Поиск партнера" 
+        type="search" placeholder="Поиск"
         aria-label="Search"
         value={query}
         onChange={(e)=>{ setQuery(e.target.value) }}

@@ -24,29 +24,35 @@ class Api::V1::DocumentsController < ApplicationController
         d.status = false
         d.count = params[:count]
         d.deadline = Date.parse(params[:deadline])
+        d.execution_deadline = Date.parse(params[:exec_date])
+        d.amount = params[:amount]
+        d.currency_id = params[:currency_id]
+        d.contract_type_id = params[:contract_type_id]
+
         if d.save!
-            render json: {
-                status: {code: 200, message: 'Document created sucessfully.'}
-            }, status: :ok
+            render json:
+                     {
+                       data:  DocumentSerializer.new(Document.last).serializable_hash
+                     }, status: :ok
         else
             render json: {
                 status: {code: 500, message: 'Can\'t create Document.'}
               }, status: 500
         end
 
-        
+
 
     end
 
 
     def update
-        
+
         if Document.find(params[:id]).update(status: params[:status].to_i)
-            
+
             render json: {
                 status: {code: 200, message: 'Document updated sucessfully.'}
             }, status: :ok
-        else 
+        else
             render json: {
                 status: {code: 500, message: 'Can\'t update Document.'}
               }, status: 500

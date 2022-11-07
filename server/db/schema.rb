@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_15_143342) do
+ActiveRecord::Schema.define(version: 2022_11_07_172350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 2022_05_15_143342) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "contract_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "departaments", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -59,6 +71,12 @@ ActiveRecord::Schema.define(version: 2022_05_15_143342) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "type_id"
     t.integer "count"
+    t.integer "amount"
+    t.date "execution_deadline"
+    t.bigint "contract_type_id"
+    t.bigint "currency_id"
+    t.index ["contract_type_id"], name: "index_documents_on_contract_type_id"
+    t.index ["currency_id"], name: "index_documents_on_currency_id"
     t.index ["departament_id"], name: "index_documents_on_departament_id"
     t.index ["type_id"], name: "index_documents_on_type_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
@@ -68,6 +86,14 @@ ActiveRecord::Schema.define(version: 2022_05_15_143342) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+  end
+
+  create_table "signatures", force: :cascade do |t|
+    t.bigint "document_id"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_id"], name: "index_signatures_on_document_id"
   end
 
   create_table "types", force: :cascade do |t|

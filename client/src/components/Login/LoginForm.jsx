@@ -12,10 +12,10 @@ class LoginForm extends React.Component {
   };
 
     componentDidUpdate() {
-  
+
       if(this.props.isFailImgMustShake && this.state.iconClasses.length == 1)
       {
-        
+
         this.setState({ iconClasses: ["active-icon", 'text-center'] });
         setTimeout(() => {this.setState({ iconClasses: ['text-center'] })}, 1000);
         this.props.setIsFailImgMustShake(false)
@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
 
   render() {
 
-    
+
     return (
       <div >
 
@@ -32,34 +32,34 @@ class LoginForm extends React.Component {
             <MDBNavbar dark expand="md" fixed="top">
               <MDBContainer>
                 <MDBNavbarBrand>
-                  <strong className="white-text">CONTSIGN</strong>
+                  <strong className="white-text">DOCOMMERCE</strong>
                 </MDBNavbarBrand>
-                
-             
+
+
               </MDBContainer>
             </MDBNavbar>
           </div>
-  
+
 
               <MDBRow>
-                
+
                 <MDBAnimation
                   type="fadeInLeft"
                   delay=".3s"
                   className="white-text text-center text-md-left col-md-6 mt-xl-5 mb-5"
                 >
                   <h1 className="h1-responsive font-weight-bold">
-                  CONTSIGN
+                  DOCOMMERCE
                   </h1>
-                  
+
                   <hr className="hr-light" />
                   <h6 className="mb-4">
-                        Повышение качества и эффективности договорного процесса работы торговых агентов 
-                        с торговыми партнерами за счет разработки более эффективной 
-                    и рациональной автоматизированной системы договорной деятельности и контроля 
+                        Повышение качества и эффективности договорного процесса работы торговых агентов
+                        с торговыми партнерами за счет разработки более эффективной
+                    и рациональной автоматизированной системы договорной деятельности и контроля
                     дисциплины и статистики электронного подписания договоров.
                   </h6>
-                  <Link  to="/about"> 
+                  <Link  to="/about">
                   <MDBBtn outline color="white"  >
                        Узнать больше
                     </MDBBtn></Link>
@@ -74,7 +74,7 @@ class LoginForm extends React.Component {
                           <MDBIcon  icon="user" /> Вход:
                         </h3>
                         <hr className="hr-light" />
-                        
+
                         <MDBInput
                           className="white-text"
                           iconClass="white-text"
@@ -93,7 +93,7 @@ class LoginForm extends React.Component {
                           onChange={(e) => this.props.setPassword(e.target.value)}
                         />
                         <div className="text-center mt-4 black-text">
-                          <MDBBtn color="indigo" type="submit">Войти</MDBBtn>
+                          <MDBBtn color="warning" type="submit">Войти</MDBBtn>
                           <hr className="hr-light" />
                           <div className="text-center d-flex justify-content-center white-label">
                             <a href="#!" className="p-2 m-2">

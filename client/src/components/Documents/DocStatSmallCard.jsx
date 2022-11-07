@@ -15,13 +15,13 @@ const DocStatSmallCard = ({docs, initDocsCount}) => {
               <div className="admin-up">
               <MDBIcon icon="file-alt" className="primary-color"/>
                 <div className="data">
-                  <p className="white-text">ВСЕГО ДОКУМЕНТОВ</p>
+                  <p className=" ">ВСЕГО ДОКУМЕНТОВ</p>
                   <h4>
                     <strong>{initDocsCount}</strong>
                   </h4>
                 </div>
               </div>
-             
+
             </MDBCard>
         </MDBCol>
         <MDBCol xl="3" md="6" className="mb-r">
@@ -29,7 +29,7 @@ const DocStatSmallCard = ({docs, initDocsCount}) => {
               <div className="admin-up">
               <MDBIcon icon="search" className="light-blue lighten-1 "/>
                 <div className="data">
-                  <p className="white-text">НАЙДЕНО ДОКУМЕНТОВ</p>
+                  <p className=" ">НАЙДЕНО ДОКУМЕНТОВ</p>
                   <h4>
                     <strong>{docs.length}</strong>
                   </h4>
@@ -49,18 +49,18 @@ const DocStatSmallCard = ({docs, initDocsCount}) => {
               <div className="admin-up">
               <MDBIcon icon="cloud-download-alt" className="warning-color"/>
                 <div className="data">
-                  <p className="white-text">С ФАЙЛОМ</p>
+                  <p className="">BYN ДОГОВОРЫ</p>
                   <h4>
-                    <strong>{docs.filter((d)=>d.file).length}</strong>
+                    <strong>{docs.filter((d)=>d.currency==="BYN").length}</strong>
                   </h4>
                 </div>
               </div>
               <MDBCardBody>
                 <div className="progress">
                   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" className="progress-bar grey " role="progressbar"
-                    style={{width:  `${docs.filter((d)=>d.file).length/docs.length*100}%` }}  ></div>
+                    style={{width:  `${docs.filter((d)=>d.currency==="BYN").length/docs.length*100}%` }}  ></div>
                 </div>
-                <MDBCardText>Документов с файлом ({ (docs.filter((d)=>d.file).length/docs.length*100).toFixed(0)}%)</MDBCardText>
+                <MDBCardText>Договоров по BYN ({ (docs.filter((d)=>d.currency==="BYN").length/docs.length*100).toFixed(0)}%)</MDBCardText>
               </MDBCardBody>
             </MDBCard>
         </MDBCol>
@@ -69,7 +69,7 @@ const DocStatSmallCard = ({docs, initDocsCount}) => {
               <div className="admin-up">
               <MDBIcon icon="check" className="red accent-2"/>
                 <div className="data">
-                  <p className="white-text">ПОДПИСАНЫ</p>
+                  <p className=" ">ПОДПИСАНЫ</p>
                   <h4>
                     <strong>{docs.filter((d)=>d.status).length}</strong>
                   </h4>
@@ -77,7 +77,7 @@ const DocStatSmallCard = ({docs, initDocsCount}) => {
               </div>
               <MDBCardBody>
                 <div className="progress">
-                  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" 
+                  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25"
                   className="progress-bar bg-primary" role="progressbar"
                   style={{width:  `${docs.filter((d)=>d.status).length/docs.length*100}%` }}  ></div>
                 </div>

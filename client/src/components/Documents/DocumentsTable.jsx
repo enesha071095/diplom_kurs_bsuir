@@ -7,7 +7,7 @@ const TableSection = ({docs}) => {
           <MDBCol md="12">
               <MDBCard>
                     <MDBView className="gradient-card-header blue darken-2">
-                        <h4 className="h4-responsive text-white">Все договоры</h4>
+                        <h4  className="h4-responsive text-white">Все договоры</h4>
                     </MDBView>
                   <MDBCardBody>
                     <MDBTable hover striped>
@@ -19,8 +19,10 @@ const TableSection = ({docs}) => {
                           <th>Создан</th>
                           <th>Срок подписания</th>
                           <th>Статус</th>
+                            <th>Валюта</th>
+                            <th>Сумма</th>
                           <th>Отдел</th>
-                          <th>Тип документа</th>
+                          <th>Тип продукции</th>
                           <th>Загрузить</th>
                         </tr>
                       </MDBTableHead>
@@ -31,16 +33,18 @@ const TableSection = ({docs}) => {
                                 <tr key={doc.id}>
                                     <td>{idx+1}</td>
                                     <td><b>{`"${doc.name}"`}</b></td>
-                                    <td><b>{doc.user_fullname}</b></td>
-                                    <td><b>{doc.created_at}</b></td>
-                                    <td><b>{doc.deadline}</b></td>
-                                    <td><b>{doc.status ? "Подписан" : "На рассмотрении"}</b></td>
-                                    <td><b>{doc.departament}</b></td>
-                                    <td><b>{doc.type}</b></td>
+                                    <td><>{doc.user_fullname}</></td>
+                                    <td><>{doc.created_at}</></td>
+                                    <td><>{doc.deadline}</></td>
+                                    <td><>{doc.status ? <MDBIcon fas icon="user-plus" style={{ color: 'green' }} /> : <MDBIcon fas icon="user-minus" style={{ color: 'red' }} />}</></td>
+                                    <td><>{doc.currency}</></td>
+                                    <td><>{doc.amount}</></td>
+                                    <td><>{doc.departament}</></td>
+                                    <td><>{doc.type}</></td>
                                     <td>
                                         <a className="p-2" href={
                                             `http://localhost:3000${doc.file}`}>
-                                            <MDBIcon icon="download" className="ml-1"/>
+                                            <MDBIcon icon="download" className="ml-1" style={{ color: 'green' }}/>
                                         </a></td>
                                 </tr>
                                 </>
@@ -51,7 +55,7 @@ const TableSection = ({docs}) => {
                   </MDBCardBody>
               </MDBCard>
           </MDBCol>
-          
+
       </MDBRow>
   )
 }
