@@ -104,9 +104,7 @@ const TopNavigation = ({logOut})=> {
                         </MDBNavItem>
 
                         <MDBNavItem>
-                        <MDBNavItem >
-                            <MDBNavLink to="/statistics" className="navLink" >Статистика</MDBNavLink>
-                        </MDBNavItem>
+
                         </MDBNavItem>
                     </MDBNavbarNav>
                     <MDBNavbarNav right>
