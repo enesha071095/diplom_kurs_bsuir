@@ -4,7 +4,7 @@ class DocumentSerializer
 
 
   attribute :created_at do |object|
-    object.type.created_at.to_date
+    object.created_at.to_date
   end
 
   attribute :type do |object|

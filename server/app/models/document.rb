@@ -23,10 +23,6 @@ class Document < ApplicationRecord
         self.contract_type_id = 1 if self.contract_type_id.blank?
     end
 
-    def random_created
-        Time.now-rand(7..20).day
-    end
-
     def create_attached
         path_to_files = "#{Rails.root}/app/assets/doc_files/"
         content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -34,10 +30,6 @@ class Document < ApplicationRecord
         create_signature
         generate_docx
         self.file.attach(io: File.open(path_to_files+"example" + self.id.to_s+".docx" ), filename: "#{self.id}.docx", content_type: content_type  )
-
-        self.created_at = random_created
-        self.save
-
     end
 
     def create_signature
