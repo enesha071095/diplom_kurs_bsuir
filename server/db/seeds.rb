@@ -128,12 +128,22 @@ def ramount
   rand(1000..4000)
 end
 
-path_to_files = "#{Rails.root}/app/assets/doc_files/"
-content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+FileUtils.rm_rf Dir.glob("app/assets/doc_files/*")
 
-def random_created
+Document.class_exec{
+  after_create :assign_random_created
+
+    private
+
+  def assign_random_created
+    self.update(created_at: random_created)
+  end
+
+  def random_created
     Time.now-rand(7..20).day
-end
+  end
+
+}
 
 ###    DOCUMENTS
 
