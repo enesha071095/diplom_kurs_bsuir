@@ -13,8 +13,8 @@ const DocCard = ({doc, changeDocStatusById}) => {
     }
 
     const isOverdue = ()=>{
-            return (!doc.status  
-             && 
+            return (!doc.status
+             &&
              (new Date(doc.deadline) < new Date()  ) )
     }
 
@@ -23,7 +23,7 @@ const DocCard = ({doc, changeDocStatusById}) => {
         return "rgba(186, 2, 61, 0.87)"
     else if(isUrgent())
         return "rgba(245, 74, 85, 0.47)"
-    else if(!doc.status) 
+    else if(!doc.status)
         return "rgba(250, 238, 20, 0.47)"
     else return 'rgba(42, 209, 42, 0.47)'
     }
@@ -42,7 +42,7 @@ const DocCard = ({doc, changeDocStatusById}) => {
 
     return (
         <>
-            <MDBCol lg="3"  className="mb-3  " 
+            <MDBCol lg="3"  className="mb-3  "
             >
                     <MDBCard className="d-flex mb-3" style={{
                background: `linear-gradient(to right, rgba(52,58,96,0.9),  ${getCardColor() }  )` }} >
@@ -50,30 +50,28 @@ const DocCard = ({doc, changeDocStatusById}) => {
                         <img src={docImg} alt="Project"  style={{display: 'block', margin: 'auto',  objectFit: 'cover'}} className="img-fluid "/>
                         <MDBMask overlay="white-slight"/>
                         </MDBView>
-                        <MDBCardBody>
+                        <MDBCardBody className="text-white">
                         <MDBCardTitle className="font-bold mb-3 text-center">
                             <strong>{doc.name}</strong>
-                           
-                           
 
                         </MDBCardTitle>
-                        <MDBCardText>
+                        <MDBCardText className="text-white">
                             <div className="font-bold mb-3 text-center" >
-                        <strong className="mb-2 font-bold mb-3 text-center"> {doc.status ?
-                                     "Подписан"  :  isOverdue() ? 
+                        <strong className="mb-2 font-bold mb-3 text-center text-white"> {doc.status ?
+                                     "Подписан"  :  isOverdue() ?
                                      "Просрочен": isUrgent() ? "К рассмотрению срочно" : "К рассмотрению"}</strong>
                                      </div>
                         <br />
                         <div className='custom-control custom-switch text-center'>
-                            {   
-                            
+                            {
+
                                 doc.status ?
                                 <>
                                 <input
                                 type='checkbox'
                                 className='custom-control-input'
                                 id='customSwitches'
-                               
+
                                 disabled defaultChecked
                                 />
                                 <label className='custom-control-label' htmlFor={ `customSwitches${doc.id}` } >
@@ -95,22 +93,22 @@ const DocCard = ({doc, changeDocStatusById}) => {
                                 </>
 
                             }
-                            
-                               
-                               
+
+
+
                         </div>
                         <br />
-                                 <strong className="mb-2">Создан: {doc.created_at}</strong> 
+                                 <strong className="mb-2">Создан: {doc.created_at}</strong>
                                 <br />
-                                <strong className="mb-2">Срок рассмотрения:  {doc.deadline}</strong> 
+                                <strong className="mb-2">Срок рассмотрения:  {doc.deadline}</strong>
                                 <br />
-                                <strong className="mb-2">Отдел:  {doc.departament}</strong> 
+                                <strong className="mb-2">Отдел:  {doc.departament}</strong>
                                 <br />
-                                <strong className="mb-2">Тип договора:  {doc.type}</strong> 
+                                <strong className="mb-2">Тип договора:  {doc.type}</strong>
                         </MDBCardText>
                         </MDBCardBody>
                         <MDBCardFooter className="links-light profile-card-footer text-center">
-                        <span className="right">
+                        <span className="right" style={{color: "#08290F"}}>
                             <a className="p-2 linkDownload" href={
                             `http://localhost:3000${doc.file}`}>
                             Загрузить договор
