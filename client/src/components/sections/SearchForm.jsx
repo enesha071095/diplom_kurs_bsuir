@@ -7,7 +7,7 @@ const SearchForm = ({query, setQuery}) => {
 
     return (
       <>
-        <input className="form-control form-control-sm"  style={{color: "white"}}
+        <input className="form-control form-control-sm"  style={{color: "black"}}
         type="search" placeholder="Поиск"
         aria-label="Search"
         value={query}
